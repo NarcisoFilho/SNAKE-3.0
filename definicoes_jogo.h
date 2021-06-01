@@ -36,6 +36,9 @@
         #define LARG_AREA_DO_JOGO 150
         #define ALTU_AREA_DO_JOGO 38
 
+        // TEMPOS
+        #define DELAY_CICLO_MAXIMO 150
+
         /// Inlcudes ═════════════════════════════════════════════════════════════════
         // Nativos
         #include <stdio.h>
@@ -49,6 +52,7 @@
                 #define _WIN32_WINNT 0x0501
         #endif
         #include "windows.h"
+        #include "sys/timeb.h"
 
         // Narconio
         #include "Narconio/narconio.h"

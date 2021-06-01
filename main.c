@@ -22,7 +22,6 @@ int main(){
         do{
                 desenhaJogo( jogo );
                 atualizaJogo( &jogo );
-                Sleep( 45 );
         }while( 1 );
 
         finalizarJanela();

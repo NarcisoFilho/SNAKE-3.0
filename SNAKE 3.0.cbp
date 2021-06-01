@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="atualiza_jogo.h" />
+		<Unit filename="calculos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="calculos.h" />
 		<Unit filename="definicoes_jogo.h" />
 		<Unit filename="desenha_jogo.c">
 			<Option compilerVar="CC" />

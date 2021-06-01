@@ -12,10 +12,13 @@
 void desenhaJogo( JOGO jogo ){
 
         // Atualização Constante
-        desenhaSnake( jogo );
+        if( jogo.flag_level_desenho_volatil ){
+                desenhaSnake( jogo );
+        }
 
         // Desenho Único
         if( jogo.flag_level_desenho_unico ){
+                limpaTela_PRO( COR_FUNDO_AREA_EXTERNA );
                 desenhaAreaDoJogo( jogo );
                 desenhaTituloSnake( jogo );
 //                desenhaDEBUGGER( jogo );
@@ -142,11 +145,12 @@ void desenhaTituloSnake( JOGO jogo ){
         );
 
         // Autor
-        printColoridoXY(
+        print_PRO(
                 "by Narciso Filho" ,
-                47 + (int)( ( jogo.tela.cols - 44 ) / (float)2 )  ,
-                8 ,
-                COR_TEXTO_TITULO_PARTIDA
+                (PONTO){ 47 + (int)( ( jogo.tela.cols - 44 ) / (float)2 )  , 8 } ,
+                PADRAO ,
+                COR_TEXTO_TITULO_PARTIDA ,
+                COR_FUNDO_AREA_EXTERNA
         );
 
         // Quadro do Level

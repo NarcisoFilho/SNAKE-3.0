@@ -43,6 +43,7 @@
                 // Flag's
                 FLAG flag_level_desenho_unico;           // Flag que indica necessidade de desenhar elementos que só precisam ser desenhados uma única vez
                 FLAG flag_level_desenho_esporadico;   // Flag que indica necessidade de desenhar elementos que só precisam ser desenhados esporadicamente
+                FLAG flag_level_desenho_volatil;   // Flag que indica necessidade de desenhar elementos voláteis
         }JOGO; /* Dados globais do jogo */
 
 #endif // __STRUCTS_H_
