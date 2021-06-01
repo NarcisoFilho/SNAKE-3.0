@@ -11,10 +11,11 @@
         void desenhaDEBUGGER( JOGO jogo );
 
         // Desenho Esporádico
-
+        void desenhaAlimento( JOGO jogo );
 
         // Desenho Único
         void desenhaAreaDoJogo( JOGO jogo );
+        void desenhaObstaculos( JOGO jogo );
         void desenhaTituloSnake( JOGO jogo );
 
 

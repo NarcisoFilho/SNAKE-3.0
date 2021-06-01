@@ -13,11 +13,15 @@ void configurarPreJogo( JOGO* jogo ){
 
         esconderCursorTec();       // Esconde o Cursor do Teclado
 
-        desabilitarEdicaoRapida( jogo->tela.handle_janela );    // Desabilita o modo de edição rápida
+//        desabilitarEdicaoRapida( jogo->tela.handle_janela );    // Desabilita o modo de edição rápida
 
         configurarAreaDoJogo( jogo );   // Configura a área do jogo
 
         carregarRecursos( jogo );       // Carrega as fontes
+
+        carregarDadosLevels( jogo );    // Carrega os dados do level
+
+        configurarJogabilidade( jogo );         // Configura a jogabilidade padrão
 
 }
 //#####################################################
@@ -146,6 +150,53 @@ void carregarRecursos( JOGO* jogo ){
         jogo->res.fonte_small = carregarFonte("Fontes/small.txt");
 }
 //#####################################################
+
+
+
+/** \brief Configura a jogabilidade padrão
+ *
+ * \param SNAKE*
+ * \return void
+ *
+ */
+void configurarJogabilidade( JOGO* jogo ){
+        jogo->dificuldade_escolhida = NORMAL;
+}
+//#####################################################
+
+
+
+/** \brief Carregar os Dados dos level's
+ *
+ * \param JOGO*
+ * \return void
+ *
+ */
+void carregarDadosLevels( JOGO* jogo ){
+
+//        for( int i = 1 ; i <= QTD_LEVELs ; i++ ){
+        for( int i = 1 ; i <= 2 ; i++ ){
+                jogo->level[ i ].qtd_alimentos_coletados = 0;
+
+                char nome[ 20 ] = { 0 };
+                char texto_descartado[ 200 ];
+                sprintf( nome , "Levels/level%d.txt" , i );
+                FILE* arq = fopen( nome , "r" );
+
+                if( arq == NULL ) ErroFatal( FALHA_AUTORIZACAO_ABERTURA_ARQ );
+
+                for( int y = 0 ; y <= ALTU_AREA_DO_JOGO ; y++ ){
+                        fgets( jogo->level[ i ].matriz[ y ] , LARG_AREA_DO_JOGO + 1 , arq );
+                        fgets( texto_descartado , 300 , arq );
+                }
+
+                fclose( arq );
+        }
+}
+//#####################################################
+
+
+
 
 
 

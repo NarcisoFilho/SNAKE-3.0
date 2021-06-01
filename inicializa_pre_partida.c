@@ -10,28 +10,22 @@
  */
 void inicializarPrePartida( JOGO* jogo ){
 
-        inicializarSnake( jogo );       // Reinicializa os dados da SNAKE
-
-        jogo->flag_level_desenho_unico = true;
-        jogo->flag_level_desenho_esporadico = true;
+        inicializarSnake_PrePartida( jogo );       // Reinicializa os dados da SNAKE
 }
 //#####################################################
 
 
-/** \brief Reinicializa a variável SNAKE
+
+/** \brief Reinicializa a variável SNAKE para nova partida
  *
  * \param SNAKE*
  * \return void
  *
  */
-void inicializarSnake( JOGO* jogo ){
-        jogo->snake.level = 0;
+void inicializarSnake_PrePartida( JOGO* jogo ){
+        jogo->snake.level = 2;
         jogo->snake.pontos = 0;
-        jogo->snake.pos[ 0 ].x = jogo->area_do_jogo.ponto.x + 9;
-        jogo->snake.pos[ 0 ].y = jogo->area_do_jogo.ponto.y + ( jogo->area_do_jogo.altu ) / 2;
-        jogo->snake.sentido = DIREITA;
-        jogo->snake.tam = 5;
-        jogo->snake.dificuldade = 1;
+        jogo->snake.dificuldade = jogo->dificuldade_escolhida;
 }
 //#####################################################
 

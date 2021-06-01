@@ -5,7 +5,6 @@
         void inicializarPrePartida( JOGO* jogo );
 
         // PRÉ-PARTIDA
-        void inicializarSnake( JOGO* );
-
+        void inicializarSnake_PrePartida( JOGO* );
 
 #endif // __INICIALIZA_PRE_PARTIDA_H_

@@ -14,18 +14,20 @@ void desenhaJogo( JOGO jogo ){
         // Atualização Constante
         if( jogo.flag_level_desenho_volatil ){
                 desenhaSnake( jogo );
+                desenhaDEBUGGER( jogo );
         }
 
         // Desenho Único
         if( jogo.flag_level_desenho_unico ){
                 limpaTela_PRO( COR_FUNDO_AREA_EXTERNA );
                 desenhaAreaDoJogo( jogo );
+                desenhaObstaculos( jogo );
                 desenhaTituloSnake( jogo );
-//                desenhaDEBUGGER( jogo );
         }
 
         // Desenho Esporádico
 //        if( jogo.flag_level_desenho_esporadico ){
+        desenhaAlimento( jogo );
 //                jogo.flag_level_desenho_esporadico = false;
 //        }
 
@@ -51,65 +53,6 @@ void desenhaSnake( JOGO jogo ){
 //#####################################################
 
 
-
-/** \brief Desenha DEBUGGER
- *
- * \param JOGO
- * \return void
- *
- */
-void desenhaDEBUGGER( JOGO jogo ){
-        defCorTxt_PRO( AZUL , BRANCO_BRILHANTE , SUBLINHADO );
-        cursorXY( 10 , 42 );
-        printf("TAM: %d " , jogo.snake.tam );
-        RESET_PADRAO;
-//        defCorTxt_PRO( AZUL , BRANCO_BRILHANTE , SUBLINHADO );
-//        cursorXY( 10 , 42 );
-//        printf("RESOLUCAO ATUAL: ( %d , %d )" , jogo.tela.resolucao.x , jogo.tela.resolucao.y );
-//        cursorXY( 10 , 43 );
-//        printf("ESCALA: ( %lf , %lf )" , jogo.tela.escalaX , jogo.tela.escalaY );
-//        cursorXY( 10 , 44 );
-//        printf("ESCALA: ( %d , %d )" , dtoi( jogo.tela.escalaX ) , dtoi( jogo.tela.escalaY ) );
-//        cursorXY( 10 , 45 );
-//        printf("QTD CASAS: ( %d , %d )" , jogo.tela.cols , jogo.tela.lins );
-//        RESET_PADRAO;
-//        defCorTxt( AMARELO_CLARO );
-//        cursorXY( 3 , 3 );
-//
-//        if( jogo.snake.sentido == DIREITA )
-//                printf("DIREITA_");
-//
-//        if( jogo.snake.sentido == ESQUERDA )
-//                printf("ESQUERDA");
-//
-//        if( jogo.snake.sentido == BAIXO )//                printf("BAIXO___");
-//
-//        if( jogo.snake.sentido == CIMA )
-//                printf("CIMA____");
-//
-//        cursorXY( 10 , 20 );
-////        printf("cos = %d      |    sin = %d" , (int)cos( jogo.snake.sentido )  , (int)sin( jogo.snake.sentido ) );
-//        cursorXY( 10 , 21 );
-//        printf("DIR cos = %d      |    sin = %d" , (int)cos( 0 )  , (int)sin( 0 ) );
-//        cursorXY( 10 , 22 );//        printf("CIM cos = %d      |    sin = %d" , (int)cos( PI / 2 )  , (int)sin( PI / 2 ) );
-//        cursorXY( 10 , 23 );
-//        printf("ESQ cos = %d      |    sin = %d" , (int)cos( PI )  , (int)sin( PI ) );
-//        cursorXY( 10 , 24 );
-//        printf("BAI cos = %d      |    sin = %d" , (int)cos( 3 * PI / 2 )  , (int)sin( 3 * PI / 2 ) );
-//
-
-//        cursorXY( 10 , 26 );
-//        defCorTxt( ROSA_CHOQUE );
-//        printf("POS ( %d , %d )" , jogo.snake.pos[ 0 ].x , jogo.snake.pos[ 0 ].y );
-//        cursorXY( 10 , 27 );
-//        defCorTxt( LARANJA );
-//        printf("SENTIDO  %f " , jogo.snake.sentido );
-//        RESET_PADRAO;
-}
-//#####################################################
-
-
-
 /** \brief Desenha a moldura do jogo
  *
  * \param JOGO
@@ -121,6 +64,56 @@ void desenhaAreaDoJogo( JOGO jogo ){
         desenMoldura_R( jogo.area_do_jogo , COR_MOLDURA_AREA_JOGO , COR_MOLDURA_FUNDO_AREA_JOGO , false );
         desenRetang( jogo.area_do_jogo.ponto.x - 1 , jogo.area_do_jogo.ponto.y - 2 , 1 , jogo.area_do_jogo.altu + 2 , COR_MOLDURA_FUNDO_AREA_JOGO );
         desenRetang( jogo.area_do_jogo.ponto.x + jogo.area_do_jogo.larg , jogo.area_do_jogo.ponto.y , 1 , jogo.area_do_jogo.altu , COR_MOLDURA_FUNDO_AREA_JOGO );
+}
+//#####################################################
+
+
+
+/** \brief Desenha os obstáculos do jogo
+ *
+ * \param JOGO
+ * \return void
+ *
+ */
+void desenhaObstaculos( JOGO jogo ){
+        int caractere;
+
+        defCorTxt_PRO( COR_OBSTACULOS , COR_FUNDO_AREA_JOGO , PADRAO );
+        for( int i = 1 ; i < ALTU_AREA_DO_JOGO - 1 ; i++ )
+                for( int j = 1 ; j < LARG_AREA_DO_JOGO - 1 ; j++ ){
+                        switch( jogo.level[ jogo.snake.level ].matriz[ i ][ j ] ){
+                                case ' ': caractere = ' '; break;
+                                case 'h': caractere = '\315'; break;
+                                case 'v': caractere = '\272'; break;
+                                case 'q': caractere = '\311'; break;
+                                case 'e': caractere = '\273'; break;
+                                case 'z': caractere = '\310'; break;
+                                case 'c': caractere = '\274'; break;
+                                case 'w': caractere = '\313'; break;
+                                case 'x': caractere = '\312'; break;
+                                default: caractere = '?';
+                        }
+                        if( caractere != ' ' ) defCorTxtFundo( COR_FUNDO_OBSTACULOS );
+
+                        cursorXY( jogo.area_do_jogo.ponto.x + j , jogo.area_do_jogo.ponto.y + i );
+                        printf("%c" , caractere );
+
+                        if( caractere != ' ' ) defCorTxtFundo( COR_FUNDO_AREA_JOGO );
+                }
+}
+//#####################################################
+
+
+
+/** \brief Desenha os alimentos da snake
+ *
+ * \param JOGO
+ * \return void
+ *
+ */
+void desenhaAlimento( JOGO jogo ){
+        if( jogo.alimento.ativo == true )
+                putcColoridoXY( CARACTERE_ALIMENTO , jogo.alimento.pos.x ,  jogo.alimento.pos.y , COR_ALIMENTO );
 }
 //#####################################################
 
@@ -160,7 +153,7 @@ void desenhaTituloSnake( JOGO jogo ){
                 COR_MOLDURA_FUNDO_AREA_JOGO ,
                 false
         );
-        print_PRO( "LEVEL" , (PONTO){ jogo.area_do_jogo.ponto.x + 3 , 9 } , PADRAO , VERDE_LIMA , COR_MOLDURA_FUNDO_AREA_JOGO );
+        print_PRO( "LEVEL" , (PONTO){ jogo.area_do_jogo.ponto.x + 3 , 9 } , PADRAO , COR_TEXTO_PONTOS_LEVEL , COR_MOLDURA_FUNDO_AREA_JOGO );
 
         // Quadro de Pontos
         desenMoldura_R(
@@ -169,7 +162,7 @@ void desenhaTituloSnake( JOGO jogo ){
                 COR_MOLDURA_FUNDO_AREA_JOGO ,
                 false
         );
-        print_PRO( "PONTOS" , (PONTO){ jogo.area_do_jogo.ponto.x + 15 , 9 } , PADRAO , VERDE_LIMA , COR_MOLDURA_FUNDO_AREA_JOGO );
+        print_PRO( "PONTOS" , (PONTO){ jogo.area_do_jogo.ponto.x + 15 , 9 } , PADRAO , COR_TEXTO_PONTOS_LEVEL , COR_MOLDURA_FUNDO_AREA_JOGO );
 
         // Quinas
         putc_PRO( '\303' , (PONTO){ jogo.area_do_jogo.ponto.x , jogo.area_do_jogo.ponto.y } , COR_MOLDURA_AREA_JOGO , COR_MOLDURA_FUNDO_AREA_JOGO , PADRAO );
@@ -178,6 +171,25 @@ void desenhaTituloSnake( JOGO jogo ){
         putc_PRO( '\301' , (PONTO){ jogo.area_do_jogo.ponto.x + 23 , jogo.area_do_jogo.ponto.y } , COR_MOLDURA_AREA_JOGO , COR_MOLDURA_FUNDO_AREA_JOGO , PADRAO );
 }
 //#####################################################
+
+
+
+/** \brief Desenha DEBUGGER
+ *
+ * \param JOGO
+ * \return void
+ *
+ */
+void desenhaDEBUGGER( JOGO jogo ){
+        cursorXY( 2 , 2 );
+        printf("delay: %d" , LATENCIA_ATUALIZACAO );
+        cursorXY( 2 , 3 );
+        printf("dific: %d" , jogo.snake.dificuldade );
+        cursorXY( 2 , 4 );
+        printf("tam: %d" , jogo.snake.tam );
+}
+//#####################################################
+
 
 
 

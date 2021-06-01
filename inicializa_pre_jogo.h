@@ -9,7 +9,9 @@
         void desabilitarEdicaoRapida( HWND );
         void ativarTelaCheia( void );
         void configurarAreaDoJogo( JOGO* );
-        void carregarRecursos( JOGO* jogo );
+        void carregarRecursos( JOGO* );
+        void carregarDadosLevels( JOGO* );
+        void configurarJogabilidade( JOGO* jogo );
         PONTO ObterResolucaoMonitor( void );
 
 

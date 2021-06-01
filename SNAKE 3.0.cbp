@@ -44,6 +44,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="desenha_jogo.h" />
+		<Unit filename="inicializa_level.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="inicializa_level.h" />
 		<Unit filename="inicializa_pre_jogo.c">
 			<Option compilerVar="CC" />
 		</Unit>

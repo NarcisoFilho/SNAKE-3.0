@@ -89,3 +89,19 @@ int dtoi( double nmr ){
 int obterTempoExeMS( void ){
         return ( clock() / ( CLOCKS_PER_SEC / 1000 ) );
 }
+
+
+
+/** \brief Gera número randômico
+ *
+ * \param int : Valor Mínimo
+ * \param int : Valor Máximo
+ * \return int : Número Randômico
+ *
+ */
+int nmrRand( int nmr_min , int nmr_max ){
+        return 2 + rand() % 8 - 1 ;
+}
+
+
+

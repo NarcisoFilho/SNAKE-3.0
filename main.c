@@ -17,8 +17,8 @@ int main(){
 
         configurarPreJogo( &jogo );
 
-        inicializarPrePartida( &jogo );    // Reinicializa os dados da SNAKE de da tela de partida
-
+        inicializarPrePartida( &jogo );    // Reinicializa os dados do jogo para NOVA PARTIDA
+        inicializarNovoLevel( &jogo );    // Reinicializa os dados do jogo para NOVO LEVEL
         do{
                 desenhaJogo( jogo );
                 atualizaJogo( &jogo );
