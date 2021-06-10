@@ -89,6 +89,7 @@ int dtoi( double nmr ){
 int obterTempoExeMS( void ){
         return ( clock() / ( CLOCKS_PER_SEC / 1000 ) );
 }
+//#####################################################
 
 
 
@@ -100,8 +101,69 @@ int obterTempoExeMS( void ){
  *
  */
 int nmrRand( int nmr_min , int nmr_max ){
-        return 2 + rand() % 8 - 1 ;
+        return nmr_min + rand() % ( nmr_max + 1 - nmr_min ) ;
 }
+//#####################################################
 
+
+/** \brief Calcula a quantidade de dígitos de números inteiros
+ *
+ * \param int : Número inteiro
+ * \return int : Quantidade de dígitos do Número
+ *
+ */
+int qtd_dig( int nmr ){
+        int qtd = 0;
+        do{
+                nmr /= 10;
+                qtd++;
+        }while( nmr );
+
+        return qtd;
+}
+//#####################################################
+
+
+/** \brief Pausa a execução por determinado tempo ou até usuário pressionar tecla enter
+ *
+ * \param int : Tempo em milisegundos
+ * \return void
+ *
+ */
+void pausa_MS_ENTER( int tempo_milisegundos ){
+        struct _timeb tempo_inicial;
+        struct _timeb tempo_atual;
+        _ftime( &tempo_inicial );
+
+        do{
+                _ftime( &tempo_atual );
+        }while( tempo_atual.time * 1000 - tempo_inicial.time * 1000 + tempo_atual.millitm - tempo_inicial.millitm  <  tempo_milisegundos
+               &&  !checaTecla_Pressionada( VK_RETURN ) );
+}
+//#####################################################
+
+
+/** \brief Pausa a execução até usuário pressionar um das teclas pertencentes ao  array teclas[]
+ *
+ * \param void
+ * \return void
+ *
+ */
+void pausaTecla( TECLA* teclas ){
+        FLAG despausar = false;
+        int i = 0;
+
+        do{
+                while( teclas[ i ] != 0 ){
+                        if( checaTecla_Pressionada( teclas[ i ] ) ){
+                                despausar = true;
+                                break;
+                        }else
+                                i++;
+                }
+                i = 0;
+        }while( !despausar );
+}
+//#####################################################
 
 

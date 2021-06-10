@@ -31,6 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Narconio/menuPadrao.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Narconio/menuPadrao.h" />
 		<Unit filename="atualiza_jogo.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -44,6 +48,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="desenha_jogo.h" />
+		<Unit filename="desenha_menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="desenha_menu.h" />
 		<Unit filename="inicializa_level.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -59,6 +67,10 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="status_jogo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="status_jogo.h" />
 		<Unit filename="structs_jogo.h" />
 		<Extensions>
 			<code_completion />

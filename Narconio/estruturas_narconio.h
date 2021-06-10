@@ -79,15 +79,32 @@
                 char** items_menu;
                 int qtd_items;
                 int selec;
-                int sair_loop;
+
+                PONTO deslocamento_items;
+                PONTO espacamento_items;
+                PONTO espacamento_sub_titulo;
+                PONTO espacamento_titulo;
 
                 COR cor_comum;
                 COR cor_select;
                 COR cor_titulo;
                 COR cor_sub_titulo;
+                COR cor_fundo;
 
-                BOOL titulo_subl;
+                BOOL ativar_fonte_items;
+                BOOL ativar_fonte_sub_titulo;
+                BOOL ativar_fonte_titulo;
+
+                FONTE fonte_titulo;
+                FONTE fonte_sub_titulo;
+                FONTE fonte_items;
+
+                BOOL sub_titulo_subl;
                 RETANG tela;
+
+                BOOL item_alterado;
+                BOOL desenho_existente;
+                BOOL sair_loop;
         }DADOS_MENU;
 
 

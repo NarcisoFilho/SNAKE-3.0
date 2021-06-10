@@ -12,7 +12,7 @@
 
         // SNAKE
         #define TAM_MAX 300             // Tamanho máximo da snake
-        #define LATENCIA_ATUALIZACAO 72   // Latência de atualização da posição da snake ( em relação ao relógio global );
+        #define INCREMENTO_TAM_ALIMENTO 2   // Tamanho adicionado à snake quando consome alimento
 
         // SENTIDOS
         #define PI 3.141592654
@@ -23,46 +23,93 @@
         #define BAIXO 270
 
         // CORES
+        #define COR_SNAKE_PADRAO VERDE_BRILHANTE
+
         #define COR_FUNDO_TITULO_PARTIDA COR_FUNDO_AREA_EXTERNA
         #define COR_TEXTO_TITULO_PARTIDA VERDE_LIMA
         #define COR_TEXTO_PONTOS_LEVEL AMARELO
+        #define COR_PONTOS_LEVEL AMARELO
+        #define COR_FUNDO_LEVEL_PONTOS CINZA_9
 
         #define COR_FUNDO_AREA_EXTERNA PRETO
         #define COR_FUNDO_AREA_JOGO CAVEIRA
         #define COR_MOLDURA_AREA_JOGO CINZA_10
         #define COR_MOLDURA_FUNDO_AREA_JOGO CINZA_5
 
-        #define COR_ALIMENTO AMARELO_CLARO
+        #define COR_ALIMENTO AMARELO
+        #define COR_ALIMENTO_FUNDO CINZA_7
         #define COR_DINHEIRO VERDE_LIMA
+        #define COR_DINHEIRO_FUNDO CINZA_7
 
-//        #define COR_FUNDO_OBSTACULOS COR_FUNDO_AREA_JOGO
         #define COR_FUNDO_OBSTACULOS MAROON
         #define COR_OBSTACULOS BRANCO_BRILHANTE
 
+        #define COR_FUNDO_PORTAL CINZA_5
+
+        #define COR_APRESENTAR_LEVEL VERDE_AZULADO_ESCURO
 
         // ÁREA DO JOGO
         #define LARG_AREA_DO_JOGO 150
         #define ALTU_AREA_DO_JOGO 38
 
         // TEMPOS
-        #define DELAY_CICLO_MAXIMO 70
+        #define DELAY_CICLO_FACIL 140    // Latência de atualização da posição da snake ( em relação ao relógio global );
+        #define DELAY_FIM_JOGO 2
+        #define DELAY_INICIO_LEVEL 1
+        #define DELAY_FIM_LEVEL 1
+        #define DELAY_MSG_GAME_OVER 5
+        #define DELAY_MSG_VITORIA 7
+        #define DELAY_EFEITO_PORTAL 80
+        #define DELAY_EFEITO_ALIMENTO 200
+        #define TEMPO_MAX_DINHEIRO_FACIL 9000
+        #define BONUS_TEMPO__DINHEIRO_LEVEL 370
+        #define TEMPO_BRILHO_COLETA 25
 
         // ITEMS DE COLETA
-        #define QTD_ALIMENTOS_FINALIZAR_LEVEL 12
-        #define QTD_PONTOS_ALIMENTOS_NORMAL 20
-        #define QTD_PONTOS_DINHEIRO_MAX 200
-        #define CARACTERE_ALIMENTO '#'
+//        #define QTD_ALIMENTOS_FINALIZAR_LEVEL 12
+        #define QTD_ALIMENTOS_FINALIZAR_LEVEL 0
+        #define QTD_PONTOS_ALIMENTOS_FACIL 10
+        #define QTD_PONTOS_PASSAR_LEVEL_POR_TAM_FACIL ( QTD_PONTOS_ALIMENTOS_FACIL / 2 )
+        #define QTD_PONTOS_DINHEIRO_MAX_FACIL 350
+        #define CARACTERE_ALIMENTO '\276'
+        #define CARACTERE_DINHEIRO '$'
+        #define TAXA_DECAIMENTO_DINHEIRO_TEMPO 2.7
 
         // PROBABILIDADES
-        #define PROBABILIDADE_GERAR_DINHEIRO 15
+        #define PROBABILIDADE_GERAR_DINHEIRO 20
 
         // LEVEL'S
-        #define QTD_LEVELs 7
+        #define QTD_LEVELs 14
 
         // DIFICULDADES
-        #define FACIL .5
-        #define NORMAL 1
-        #define DIFICIL 2
+        #define FACIL 1
+        #define NORMAL 2
+        #define DIFICIL 3
+
+        // PORTAL
+        #define QTD_CORES_FUNDO_PORTAL 7
+        #define QTD_CORES_TEXTO_PORTAL 7
+        #define QTD_CARACTERES_PORTAL 4
+
+        // MODO DE TESTE
+        #define TECLA_MODO_DE_TESTE VK_F2
+
+        // MENU
+        #define MENU_DELAY 85    // Latência de atualização do menu
+        #define MENU_COR_FUNDO CAVEIRA
+        #define MENU_COR_COMUM CINZA_5
+        #define MENU_COR_SELECT VERDE_AZULADO_ESCURO
+        #define MENU_COR_SUB_TITULO VERDE_MUSGO
+        #define MENU_COR_TITULO VERDE_BRILHANTE
+        #define MENU_QTD_ITEMS  5
+        #define MENU_MAX_CARACTERES_NOME_ITEM  20
+
+        // MACROS
+        #define FIM_DE_JOGO ( checaGameOver( jogo )  ||  checaJogoZerado( jogo ) )
+        #define _FIM_DE_JOGO ( checaGameOver( *jogo )  ||  checaJogoZerado( *jogo ) )
+        #define _DIFICULDADE jogo->snake.dificuldade
+        #define DIFICULDADE jogo.snake.dificuldade
+        #define REDESENHA_MENU { LMPTELA ; jogo.menu.desenho_existente = 0 ; jogo.menu.item_alterado = 1; }
 
         /// Inlcudes ═════════════════════════════════════════════════════════════════
         // Nativos
@@ -91,5 +138,8 @@
         #include "atualiza_jogo.h"
         #include "desenha_jogo.h"
         #include "calculos.h"
+        #include "status_jogo.h"
+        #include "desenha_menu.h"
+        #include "Narconio/menuPadrao.h"
 
 #endif // __DEFINICOES_JOGO_H_

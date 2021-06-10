@@ -10,5 +10,8 @@
         int dtoi( double nmr );
         int obterTempoExeMS( void );
         int nmrRand( int nmr_min , int nmr_max );
+        int qtd_dig( int nmr );
+        void pausa_MS_ENTER( int );
+        void pausaTecla( TECLA* teclas  );
 
 #endif // __CALCULOS_H_

@@ -12,8 +12,9 @@
         void carregarRecursos( JOGO* );
         void carregarDadosLevels( JOGO* );
         void configurarJogabilidade( JOGO* jogo );
+        void configurarMenu( JOGO* jogo );
         PONTO ObterResolucaoMonitor( void );
 
-
+        void ativarModoDeTeste( JOGO* jogo );
 
 #endif // __INICIALIZA_PRE_JOGO_H_

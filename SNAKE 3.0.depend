@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1622578137 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\main.c
+1623349601 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\main.c
 	"Narconio/narconio.h"
 	"definicoes_jogo.h"
 
-1622400202 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\narconio\narconio.h
+1622903851 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\narconio\narconio.h
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -11,7 +11,7 @@
 	"estruturas_narconio.h"
 	"windows_narconio.h"
 
-1622215325 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\narconio\estruturas_narconio.h
+1622904448 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\narconio\estruturas_narconio.h
 
 1621871884 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\narconio\windows_narconio.h
 	<windows.h>
@@ -22,7 +22,7 @@
 
 1622392311 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\arqsfonte\headers\definicoes.h
 
-1622578576 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\definicoes_jogo.h
+1623348037 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\definicoes_jogo.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
@@ -39,47 +39,67 @@
 	"atualiza_jogo.h"
 	"desenha_jogo.h"
 	"calculos.h"
+	"status_jogo.h"
+	"desenha_menu.h"
+	"Narconio/menuPadrao.h"
 
-1622577598 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\structs_jogo.h
+1623261471 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\structs_jogo.h
 	"definicoes_jogo.h"
 
 1622485301 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_jogo.h
 	"definicoes_jogo.h"
 
-1622573553 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\atualiza_jogo.h
+1623335196 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\atualiza_jogo.h
 	"definicoes_jogo.h"
 
-1622572672 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\desenha_jogo.h
+1623248963 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\desenha_jogo.h
 	"definicoes_jogo.h"
 
-1622577187 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\atualiza_jogo.c
+1623346347 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\atualiza_jogo.c
 	"definicoes_jogo.h"
 
-1622578525 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\desenha_jogo.c
+1623265273 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\desenha_jogo.c
 	"definicoes_jogo.h"
 
 1622485394 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_jogo.c
 	"definicoes_jogo.h"
 
-1622578372 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_pre_jogo.h
+1622854242 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_pre_jogo.h
 	"definicoes_jogo.h"
 
 1622577505 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_pre_partida.h
 
-1622578355 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_pre_jogo.c
+1623283804 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_pre_jogo.c
 	"definicoes_jogo.h"
 
-1622578308 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_pre_partida.c
+1623263311 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_pre_partida.c
 	"definicoes_jogo.h"
 
-1622559825 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\calculos.c
+1623336155 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\calculos.c
 	"definicoes_jogo.h"
 
-1622559813 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\calculos.h
+1623335815 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\calculos.h
 	"definicoes_jogo.h"
 
-1622578292 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_level.h
+1622665543 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_level.h
 
-1622578304 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_level.c
+1623263346 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\inicializa_level.c
 	"definicoes_jogo.h"
+
+1622653479 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\status_jogo.h
+
+1623264495 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\status_jogo.c
+	"definicoes_jogo.h"
+
+1623347763 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\desenha_menu.h
+
+1623350641 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\desenha_menu.c
+	"definicoes_jogo.h"
+
+1622904804 c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\narconio\menupadrao.h
+	"narconio.h"
+	<windows.h>
+
+1623247875 source:c:\users\narci\onedrive\documentos\carcarÁ games\snake 3.0\narconio\menupadrao.c
+	"menuPadrao.h"
 

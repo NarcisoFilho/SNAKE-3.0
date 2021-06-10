@@ -9,11 +9,12 @@
  *
  */
 void configurarPreJogo( JOGO* jogo ){
+
         configurarTela( &jogo->tela );     // Incializa a variável tela
 
         esconderCursorTec();       // Esconde o Cursor do Teclado
 
-//        desabilitarEdicaoRapida( jogo->tela.handle_janela );    // Desabilita o modo de edição rápida
+        desabilitarEdicaoRapida( jogo->tela.handle_janela );    // Desabilita o modo de edição rápida
 
         configurarAreaDoJogo( jogo );   // Configura a área do jogo
 
@@ -22,6 +23,10 @@ void configurarPreJogo( JOGO* jogo ){
         carregarDadosLevels( jogo );    // Carrega os dados do level
 
         configurarJogabilidade( jogo );         // Configura a jogabilidade padrão
+
+        ativarModoDeTeste( jogo );      // Ativa o modo de teste se tecla específica estiver pressionada
+
+        configurarMenu( jogo );         // Configura o menu
 
 }
 //#####################################################
@@ -148,6 +153,7 @@ void configurarAreaDoJogo( JOGO* jogo ){
 void carregarRecursos( JOGO* jogo ){
         jogo->res.fonte_big = carregarFonte("Fontes/big.txt");
         jogo->res.fonte_small = carregarFonte("Fontes/small.txt");
+        jogo->res.fonte_starWars = carregarFonte("Fontes/starWars.txt");
 }
 //#####################################################
 
@@ -161,6 +167,34 @@ void carregarRecursos( JOGO* jogo ){
  */
 void configurarJogabilidade( JOGO* jogo ){
         jogo->dificuldade_escolhida = NORMAL;
+        jogo->flag_modo_infinito = false;
+}
+//#####################################################
+
+
+
+/** \brief Ativa modo de teste se tecla TECLA_MODO_DE_TESTE for pressionada na inicialização
+ *
+ * \param JOGO*
+ * \return void
+ *
+ */
+void ativarModoDeTeste( JOGO* jogo ){
+        if( checaTecla_Down( TECLA_MODO_DE_TESTE ) ){
+                jogo->flag_modo_de_teste = true;
+                printFonte(
+                           " MODO DE TESTE " ,
+                           jogo->res.fonte_starWars ,
+                           (PONTO){ jogo->tela.cols / 2 - 80 , jogo->tela.lins / 2 } ,
+                           5 ,
+                           LARANJA ,
+                           CINZA_7
+                );
+                pausaS( 2 );
+                LMPTELA;
+        }
+        else jogo->flag_modo_de_teste = false;
+
 }
 //#####################################################
 
@@ -174,15 +208,14 @@ void configurarJogabilidade( JOGO* jogo ){
  */
 void carregarDadosLevels( JOGO* jogo ){
 
-//        for( int i = 1 ; i <= QTD_LEVELs ; i++ ){
-        for( int i = 1 ; i <= 2 ; i++ ){
-                jogo->level[ i ].qtd_alimentos_coletados = 0;
+        for( int i = 1 ; i <= QTD_LEVELs ; i++ ){
+                char nome[ 20 ] =
+                 { 0 };
 
-                char nome[ 20 ] = { 0 };
-                char texto_descartado[ 200 ];
                 sprintf( nome , "Levels/level%d.txt" , i );
-                FILE* arq = fopen( nome , "r" );
 
+                char texto_descartado[ 301 ];
+                FILE* arq = fopen( nome , "r" );
                 if( arq == NULL ) ErroFatal( FALHA_AUTORIZACAO_ABERTURA_ARQ );
 
                 for( int y = 0 ; y <= ALTU_AREA_DO_JOGO ; y++ ){
@@ -190,8 +223,94 @@ void carregarDadosLevels( JOGO* jogo ){
                         fgets( texto_descartado , 300 , arq );
                 }
 
+                for( int k = 1 ; k < ALTU_AREA_DO_JOGO - 1 ; k++ )
+                        for( int j = 1 ; j < LARG_AREA_DO_JOGO - 1 ; j++ )
+                                if( jogo->level[ i ].matriz[ k ][ j ] == 'o' )
+                                        jogo->level[ i ].origem_snake = (PONTO){ j , k };
+
                 fclose( arq );
         }
+}
+//#####################################################
+
+
+
+/** \brief Configura o menu
+ *
+ * \param JOGO*
+ * \return void
+ *
+ */
+void configurarMenu( JOGO* jogo ){
+        // Cores
+        jogo->menu.cor_comum = MENU_COR_COMUM;
+        jogo->menu.cor_select = MENU_COR_SELECT;
+        jogo->menu.cor_sub_titulo = MENU_COR_SUB_TITULO;
+        jogo->menu.cor_titulo = MENU_COR_TITULO;
+        jogo->menu.cor_fundo = MENU_COR_FUNDO;
+
+        // Items
+        char items[][ MENU_MAX_CARACTERES_NOME_ITEM ] = {
+                "Campanha" ,
+                "Sobrevivencia" ,
+                "Dificuldade" ,
+                "HighScores" ,
+                "Sair"
+        };
+
+        jogo->menu.qtd_items = MENU_QTD_ITEMS;
+        jogo->menu.items_menu = (char**)malloc( jogo->menu.qtd_items * sizeof( char* ) );
+        for( int i = 0 ; i < jogo->menu.qtd_items ; i++ ){
+                jogo->menu.items_menu[ i ] =
+                (char*)malloc( ( strlen( items[ i ] ) + 1 ) * sizeof( char ) );
+
+                strcpy( jogo->menu.items_menu[ i ] , items[ i ] );
+        }
+
+        jogo->menu.espacamento_items.x = 4;
+        jogo->menu.espacamento_items.y = 5;
+
+        jogo->menu.deslocamento_items.x = 0;
+        jogo->menu.deslocamento_items.y = -3;
+
+        // Título
+        char titulo[] = "SNAKE 3.0";
+        jogo->menu.titulo =
+        (char*)malloc( ( strlen( titulo ) + 1 ) *sizeof( char ) );
+
+        strcpy( jogo->menu.titulo , titulo );
+
+        jogo->menu.espacamento_titulo.x = 7;
+        jogo->menu.espacamento_titulo.y = 4;
+
+        // Sub-Título
+        char sub_titulo[] = "by Narciso Filho";
+        jogo->menu.sub_titulo =
+        (char*)malloc( ( strlen( sub_titulo ) + 1 )  *sizeof( char ) );
+
+        strcpy( jogo->menu.sub_titulo , sub_titulo );
+        jogo->menu.sub_titulo_subl = false;
+        jogo->menu.espacamento_sub_titulo.x = 3;
+        jogo->menu.espacamento_sub_titulo.y = 0;
+
+        // Reinicializar Flags
+        jogo->menu.sair_loop = false;
+        jogo->menu.item_alterado = true;
+        jogo->menu.selec = 0;
+        jogo->menu.ativar_fonte_items = true;
+        jogo->menu.ativar_fonte_sub_titulo = false;
+        jogo->menu.ativar_fonte_titulo = true;
+
+        // Tela
+        jogo->menu.tela.ponto.x = 0;
+        jogo->menu.tela.ponto.y = 0;
+        jogo->menu.tela.larg = jogo->tela.cols;
+        jogo->menu.tela.altu = jogo->tela.lins;
+
+        // Fontes
+        jogo->menu.fonte_items = jogo->res.fonte_small;
+        jogo->menu.fonte_sub_titulo = jogo->res.fonte_small;
+        jogo->menu.fonte_titulo = jogo->res.fonte_big;
 }
 //#####################################################
 

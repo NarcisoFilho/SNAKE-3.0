@@ -36,16 +36,17 @@
 
 ///### INICIALIZAÇÃO ═══════════════════════════════════════════
         void inicializarJanela( void );           // Inicializa a janela ANSI
-        void finalizarJanela( void );            // Finaliza a janela restaurando padrão
+        void finalizarJanela( void );                                            // Finaliza a janela restaurando padrão
 
 
 ///### CONTROLE DE EXECUÇÃO ════════════════════════════════════
         void pausaMS( int tempoMS );                 // Pausa a execução. Tempo em millisegundos
         void pausaS( float tempoS );                  // Pausa a execução. Tempo em segundos
+        void pausaST( float tempoS );             // Pausa a execução por alguns segundos ou até usuário apertar alguma tecla
         void pausaE( void );                              // Pausa a execução até o usuário pressionar enter
         void pausaE_PRO( void );                     //Pausa a execução até o usuário pressionar enter, com limpeza prévia de buffer e pausa de no mínimo 0,5 s
         void limpaBuffer( void );                        // Limpa o buffer do teclado
-        void limpaBuffer_PRO( void );              // Limpa o buffer do teclado com garantia de não alteração do cursor
+        void limpaBuffer_PRO( void );                        // Limpa o buffer do teclado com garantia de não alteração do cursor
         void ErroFatal( int cod );                        // Encerra sistema e exibe mensagem de erro
 
         // CODIGOS DE ERROS
@@ -112,8 +113,21 @@
         #define AZUL_2 19
         #define AZUL_3 20
         #define AZUL_4 21
+        #define VERDE_AZULADO_ESCURO 23
+        #define VERDE_ESCURO 28
         #define VERDE_BRILHANTE 46
+        #define VIOLETA_0 57
+        #define VIOLETA_1 56
+        #define VIOLETA_2 55
+        #define VIOLETA_3 54
+        #define VIOLETA_4 53
         #define MAROON 52
+        #define AMARELO_0 195
+        #define AMARELO_1 194
+        #define AMARELO_2 193
+        #define AMARELO_3 192
+        #define AMARELO_4 191
+        #define AMARELO_5 190
         #define ROSA_CHOQUE 200
         #define LARANJA 202
         #define AMARELO_CLARO 190
@@ -146,7 +160,6 @@
         // ESTILOS DE TEXTO
         #define PADRAO 0
         #define NEGRITO 1
-        #define ITALICO 3
         #define SUBLINHADO 4
         #define COR_NEGATIVA 7
 
@@ -175,6 +188,7 @@
         /// FONTES --------------------------------------------------------------------------------------------
         FONTE carregarFonte( char* nome );                                                                                          // Carrega uma Fonte
        void printFonte( char* texto , FONTE fonte , PONTO ponto , int espacamento , COR cor_text , COR cor_fundo );              // Desenha um texto na tela com fonte personalizada
+        int strlen_fonte( char* texto , FONTE fonte , int espacamento );
 
 ///### STRINGS ════════════════════════════════════════════════════════
         int centraTxtXTela( char* texto , RETANG tela );                    // Retorna coordenada de inserção de string para centralização horizontal

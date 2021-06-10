@@ -26,11 +26,15 @@
                 int level;                      // O level atual
                 float sentido;                      // Sentido atual
                 int dificuldade;                // Dificuldade de jogo
+                BOOL viva;                      // Status de vida da snake
+                COR cor;    // Cor da snake
+                FLAG flag_level_finalizado;     // Flag que indica se level foi finalizado
         }SNAKE; /* Dados da snake, ou seja do jogador */
 
         typedef struct{
                 FONTE fonte_big;
                 FONTE fonte_small;
+                FONTE fonte_starWars;
         }RES; /* Recursos do jogo */
 
         typedef struct{
@@ -40,8 +44,7 @@
 
         typedef struct{
                 PONTO pos;
-                struct timeb momento_geracao;
-                struct timeb momento_coleta;
+                struct _timeb momento_geracao;
                 long int tempo_decorrido;
                 BOOL ativo;
         }DINHEIRO; /* Alimento BÔNUS da SNAKE */
@@ -54,6 +57,7 @@
         typedef struct{
                 char matriz[ ALTU_AREA_DO_JOGO ][ LARG_AREA_DO_JOGO + 1 ];  // Cópia do desenho do mapa contido no arquivo txt
                 int qtd_alimentos_coletados;        // Quantidade de alimentos já coletados naquele level
+                PONTO origem_snake;        // Ponto incial da snake
         }LEVEL; /* Dados do level carregados de arquivo .txt*/
 
         typedef struct{
@@ -61,17 +65,20 @@
                 TELA tela;                      // Tela do jogo
                 RETANG area_do_jogo;        // A área do jogo onde a snake pode se movimentar
 
+                // Menu
+                DADOS_MENU menu;        // Menu do Jogo
+
                 // Jogador
                 SNAKE snake;                 // Dados da snake em jogo;
 
-                //Items
+                //Items Coletáveis
                 ALIMENTO alimento;             // Item de coleta comum
                 DINHEIRO dinheiro;             // Item de coleta especial
                 PORTAL portal;                    // Portal de finalização do level
 
                 // Rescursos
                 RES res;        // Recursos do jogo
-                LEVEL level[ QTD_LEVELs ];  // Os leveis do jogo
+                LEVEL level[ QTD_LEVELs + 1 ];  // Os leveis do jogo
 
                 int dificuldade_escolhida;      // Dificuldade definida no menu ( padrão será NORMAL, podendo ser alterada para FÁCIL ou DIFÍCIL )
 
@@ -79,6 +86,8 @@
                 FLAG flag_level_desenho_unico;           // Flag que indica necessidade de desenhar elementos que só precisam ser desenhados uma única vez
                 FLAG flag_level_desenho_esporadico;   // Flag que indica necessidade de desenhar elementos que só precisam ser desenhados esporadicamente
                 FLAG flag_level_desenho_volatil;   // Flag que indica necessidade de desenhar elementos voláteis
+                FLAG flag_modo_infinito;   // Flag que indica que partida foi iniciada em modo inifinito
+                FLAG flag_modo_de_teste;   // Flag que indica que jogo foi iniciado em modo de teste
         }JOGO; /* Dados globais do jogo */
 
 #endif // __STRUCTS_H_

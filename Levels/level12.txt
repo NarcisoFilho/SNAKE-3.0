@@ -1,0 +1,39 @@
+######################################################################################################################################################
+#            vv              vv      vv                                vv      vv                                                                    #
+#            vv              vv      vv                                vv      vv                                                                    #
+#            vv              vv      vv                                vv      vv                                                                    #
+#            vv              vv      vv                                vv      vv                                                                    #
+#            vv              vv      vv                                vv      vv                                                                    #
+#            vv              vv      vv                      vv        vv      vv        vv                                                          #
+#hhhhhhhhhhhhxc              vv      vv                      vv        vv      vv        vv                                            hhhhhhhhhhhhhh#
+#                            vv      vv                      vv        vv      vv        vv                                                          #
+#                            vv      vv                      vv        vv      vv        vv                                                          #
+#                            vv      vv              hhhhhhhhxc        vv      vv        zxhhhhhh                                                    #
+#                            vv      vv                                vv      vv                                                                    #
+#                            vv      vv                                vv      vv                                                                    #
+#                            vv      vv                                vv      vv                                                                    #
+#                            vv      vv                                vv      vv                                                                    #
+#hhhhhhhhhhhhhhhhhhhhhhhhhhhhxc      zxhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhxc      zxhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh#
+#                                                                                                                                                    #
+#                                                                                                                                                    #
+#             o                                                                                                                                      #
+#                                                                                                                                                    #
+#hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhwe      qwhhhhhhhhhhhhhhhhhhhhhhhhhhhhwe      qwhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh#
+#                                                                      vv      vv                            vv      vv                              #
+#                                                                      vv      vv                            vv      vv                              #
+#                                                                      vv      vv                            vv      vv                              #
+#                                                                      vv      vv                            vv      vv                              #
+#                                                    hhhhhhhhwe        vv      vv        qwhhhhhhhh          vv      vv                              #
+#                                                            vv        vv      vv        vv                  vv      vv                              #
+#                                                            vv        vv      vv        vv                  vv      vv                              #
+#                                                            vv        vv      vv        vv                  vv      vv                              #
+#                                                            vv        vv      vv        vv                  vv      vv                              #
+#            we                                                        vv      vv                            vv      vv                qwhhhhhhhhhhhh#
+#            vv                                                        vv      vv                            vv      vv                vv            #
+#            vv                                                        vv      vv                            vv      vv                vv            #
+#            vv                                                        vv      vv                            vv      vv                vv            #
+#            vv                                                        vv      vv                            vv      vv                vv            #
+#            vv                                                        vv      vv                            vv      vv                vv            #
+#            vv                                                        vv      vv                            vv      vv                vv            #
+######################################################################################################################################################
+
