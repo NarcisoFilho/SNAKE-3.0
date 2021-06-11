@@ -520,3 +520,142 @@ void atualizaPortal( JOGO* jogo ){
                         }
 }
 //#####################################################
+
+
+
+/** \brief Verificar se Usuário Está solicitando o fechamento do jogo
+ *      Aborta o jogo se usuário pressionar ctrl + f4
+ *
+ * \param void
+ * \return void
+ *
+ */
+void verificarFecharJogoTeclado( void ){
+        if( checaTecla_Pressionada( VK_CONTROL ) )
+                if( checaTecla_Pressionada( VK_F4 ) )
+                        exit( 2 );
+}
+//#####################################################
+
+
+
+/** \brief Salvar pontuação em HighScores ( Se pontuação for suficiente )
+ *
+ * \param void
+ * \return void
+ *
+ */
+void salvaPontuac( JOGO* jogo ){
+        int level = jogo->flag_modo_infinito  ?  jogo->snake.level  :  0 ;
+
+        for( int i = 0 ; i < QTD_HIGHSCORES ; i++ )
+                if( jogo->snake.pontos > jogo->highscores[ level ][ i ].pontos ){
+                        for( int j = QTD_HIGHSCORES - 1 ; j > i ; j-- ){
+                                jogo->highscores[ level ][ j ].pontos = jogo->highscores[ level ][ j - 1 ].pontos;
+                                strcpy( jogo->highscores[ level ][ j ].nome_jogador , jogo->highscores[ level ][ j - 1 ].nome_jogador );
+                        }
+
+                        jogo->highscores[ level ][ i ].pontos = jogo->snake.pontos;
+                        strcpy( jogo->highscores[ level ][ i ].nome_jogador , coletarNomeJogador( jogo ) );
+                        salvaHighScoresArquivo( jogo );
+                        return;
+                }
+}
+//#####################################################
+
+
+
+/** \brief Salvar os HighScores no arquivo
+ *
+ * \param JOGO*
+ * \return void
+ *
+ */
+void salvaHighScoresArquivo( JOGO* jogo ){
+        FILE* arq = fopen( "HighScores/highscores.bin" , "wb" );
+        if( arq == NULL ) return;
+
+        for( int i = 0 ; i <= QTD_LEVELs ; i++ )
+                for( int j = 0 ; j < 5 ; j++ )
+                        fwrite( &jogo->highscores[ i ][ j ] , sizeof( HIGHSCORES ) , 1 , arq );
+        fclose( arq );
+}
+//#####################################################
+
+
+
+/** \brief Coleta o nome do jogador para salvar no highscores
+ *
+ * \param JOGO*
+ * \return char* : Nome colefontetado
+ *
+ */
+char* coletarNomeJogador( JOGO* jogo ){
+        static char nome[ 100 ];
+        strcpy( nome , "\0" );
+        FONTE fonte = jogo->res.fonte_small;
+
+        colorirTela( jogo , COR_FUNDO_AREA_EXTERNA );
+
+        printFonte(
+                "Seu Nome:",
+                fonte,
+                (PONTO){
+                        ( jogo->tela.cols - strlen_fonte( "Seu nome" , fonte , 3 ) ) / 2 ,
+                        jogo->tela.lins / 2 - fonte.altu - 5
+                },
+                4,
+                BRANCO_BRILHANTE,
+                COR_FUNDO_AREA_EXTERNA
+        );
+
+        desenMoldura_R( (RETANG){ { ( jogo->tela.cols - 117 ) / 2 , ( jogo->tela.lins - fonte.altu ) / 2 - 1 } , 117 , fonte.altu + 2 } , BRANCO_BRILHANTE , COR_FUNDO_AREA_EXTERNA , true );
+
+        #include <conio.h>
+        char ch;
+        while( kbhit() ) ch = getch();
+        do{
+                if( !checaTecla_Pressionada( VK_RETURN ) ){
+                        ch = getch();
+                        if( ch != '\n'  &&  ch != '\r' ){
+                                printFonte(
+                                        nome ,
+                                        fonte ,
+                                        (PONTO){
+                                                ( jogo->tela.cols - strlen_fonte( nome , fonte , 4 ) - 1 ) / 2 ,
+                                                ( jogo->tela.lins - fonte.altu ) / 2
+                                        } ,
+                                        4 ,
+                                        COR_FUNDO_AREA_EXTERNA ,
+                                        COR_FUNDO_AREA_EXTERNA
+                                );
+
+                                if( ch == '\b' )
+                                        nome[ strlen( nome ) - 1 ] = '\0';
+                                else
+                                        if( strlen( nome ) < TAM_MAX_NOME ){
+                                                nome[ strlen( nome ) + 1 ] = '\0';
+                                                nome[ strlen( nome ) ] = ch;
+                                        }
+
+                                if( strlen( nome ) ){
+                                        printFonte(
+                                                nome ,
+                                                fonte ,
+                                                (PONTO){
+                                                        ( jogo->tela.cols - strlen_fonte( nome , fonte , 4 ) ) / 2 ,
+                                                        ( jogo->tela.lins - fonte.altu ) / 2
+                                                } ,
+                                                4 ,
+                                                VERDE_BRILHANTE ,
+                                                COR_FUNDO_AREA_EXTERNA
+                                        );
+                                }
+                        }
+                }
+        }while( !checaTecla_Pressionada( VK_RETURN ) );
+
+
+        return nome;
+}
+//#####################################################

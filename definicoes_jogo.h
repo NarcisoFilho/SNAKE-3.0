@@ -66,8 +66,7 @@
         #define TEMPO_BRILHO_COLETA 25
 
         // ITEMS DE COLETA
-//        #define QTD_ALIMENTOS_FINALIZAR_LEVEL 12
-        #define QTD_ALIMENTOS_FINALIZAR_LEVEL 0
+        #define QTD_ALIMENTOS_FINALIZAR_LEVEL 12
         #define QTD_PONTOS_ALIMENTOS_FACIL 10
         #define QTD_PONTOS_PASSAR_LEVEL_POR_TAM_FACIL ( QTD_PONTOS_ALIMENTOS_FACIL / 2 )
         #define QTD_PONTOS_DINHEIRO_MAX_FACIL 350
@@ -95,7 +94,7 @@
         #define TECLA_MODO_DE_TESTE VK_F2
 
         // MENU
-        #define MENU_DELAY 85    // Latência de atualização do menu
+        #define MENU_DELAY 40       // Latência de atualização do menu
         #define MENU_COR_FUNDO CAVEIRA
         #define MENU_COR_COMUM CINZA_5
         #define MENU_COR_SELECT VERDE_AZULADO_ESCURO
@@ -103,6 +102,10 @@
         #define MENU_COR_TITULO VERDE_BRILHANTE
         #define MENU_QTD_ITEMS  5
         #define MENU_MAX_CARACTERES_NOME_ITEM  20
+
+        // HIGHSCORES
+        #define QTD_HIGHSCORES 5
+        #define TAM_MAX_NOME 14
 
         // MACROS
         #define FIM_DE_JOGO ( checaGameOver( jogo )  ||  checaJogoZerado( jogo ) )

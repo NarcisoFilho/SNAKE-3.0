@@ -28,4 +28,10 @@
         // Pause
         void atualizaPause( JOGO* );
 
+        // Extras
+        void verificarFecharJogoTeclado( void );
+        void salvaPontuac( JOGO* jogo );
+        void salvaHighScoresArquivo( JOGO* jogo );
+        char* coletarNomeJogador( JOGO* jogo );
+
 #endif // __ATUALIZA_JOGO_H_

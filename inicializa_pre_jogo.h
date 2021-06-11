@@ -13,6 +13,7 @@
         void carregarDadosLevels( JOGO* );
         void configurarJogabilidade( JOGO* jogo );
         void configurarMenu( JOGO* jogo );
+        void carregarHighscores( JOGO* );
         PONTO ObterResolucaoMonitor( void );
 
         void ativarModoDeTeste( JOGO* jogo );

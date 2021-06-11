@@ -347,3 +347,17 @@ void colorirSnake( JOGO* jogo , COR cor ){
                 desenRetang( jogo->snake.pos[ bloco ].x , jogo->snake.pos[ bloco ].y , 2 , 1 , jogo->snake.cor );
 }
 //#####################################################
+
+
+
+/** \brief Colore a tela
+ *
+ * \param JOGO*
+ * \param COR
+ * \return void
+ *
+ */
+void colorirTela( JOGO* jogo , COR cor ){
+        desenRetang( 1 , 1 , jogo->tela.cols , jogo->tela.lins , cor );
+}
+//#####################################################

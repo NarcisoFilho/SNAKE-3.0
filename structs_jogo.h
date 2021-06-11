@@ -61,6 +61,11 @@
         }LEVEL; /* Dados do level carregados de arquivo .txt*/
 
         typedef struct{
+                char nome_jogador[ TAM_MAX_NOME + 1 ];
+                int pontos;
+        }HIGHSCORES; /* Registro das pontuações mais altas carregadas de arquivo .bin */
+
+        typedef struct{
                 // Tela
                 TELA tela;                      // Tela do jogo
                 RETANG area_do_jogo;        // A área do jogo onde a snake pode se movimentar
@@ -79,6 +84,9 @@
                 // Rescursos
                 RES res;        // Recursos do jogo
                 LEVEL level[ QTD_LEVELs + 1 ];  // Os leveis do jogo
+
+                HIGHSCORES highscores[ QTD_LEVELs + 1 ][ QTD_HIGHSCORES ];     // Carrega os highscores, de cada modo de jogo, do arquivo highscores.bin
+                // highscores[ 0 ] para modo campanha e highcores[ level ] para cada level no modo sobrevivência
 
                 int dificuldade_escolhida;      // Dificuldade definida no menu ( padrão será NORMAL, podendo ser alterada para FÁCIL ou DIFÍCIL )
 

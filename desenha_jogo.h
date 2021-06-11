@@ -27,5 +27,6 @@
         // Extras
         void apagarDinheiro( JOGO* );
         void colorirSnake( JOGO* , COR );
+        void colorirTela( JOGO* jogo , COR cor );
 
 #endif // __DESENHA_JOGO_H_

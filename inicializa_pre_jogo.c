@@ -28,6 +28,7 @@ void configurarPreJogo( JOGO* jogo ){
 
         configurarMenu( jogo );         // Configura o menu
 
+        carregarHighscores( jogo );     // Carrega os highscores, de cada modo de jogo, do arquivo highscores.bin
 }
 //#####################################################
 
@@ -209,8 +210,7 @@ void ativarModoDeTeste( JOGO* jogo ){
 void carregarDadosLevels( JOGO* jogo ){
 
         for( int i = 1 ; i <= QTD_LEVELs ; i++ ){
-                char nome[ 20 ] =
-                 { 0 };
+                char nome[ 20 ] = { 0 };
 
                 sprintf( nome , "Levels/level%d.txt" , i );
 
@@ -230,6 +230,25 @@ void carregarDadosLevels( JOGO* jogo ){
 
                 fclose( arq );
         }
+}
+//#####################################################
+
+
+
+/** \brief Carregar os HighScores
+ *
+ * \param JOGO*
+ * \return void
+ *
+ */
+void carregarHighscores( JOGO* jogo ){
+        FILE* arq = fopen( "HighScores/highscores.bin" , "rb" );
+        if( arq == NULL ) ErroFatal( FALHA_AUTORIZACAO_ABERTURA_ARQ );
+
+        for( int i = 0 ; i <= QTD_LEVELs ; i++ )
+                for( int j = 0 ; j < 5 ; j++ )
+                        fread( &jogo->highscores[ i ][ j ] , sizeof( HIGHSCORES ) , 1 , arq );
+        fclose( arq );
 }
 //#####################################################
 

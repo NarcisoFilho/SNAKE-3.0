@@ -122,28 +122,34 @@ void desenNovoLevel( JOGO jogo ){
         const int delay = 5;
         COR cor = 1;
         COR cor_nome = jogo.snake.level;
-        if( jogo.snake.level == 13 ) cor_nome = AMARELO;
-        if( jogo.snake.level == 14 ) cor_nome = LARANJA;
+        COR cor_fundo_nome = PRETO;
+
+        if( jogo.snake.level == 13 ) cor_nome = AMARELO , cor_fundo_nome = VERDE;
+        if( jogo.snake.level == 14 ) cor_nome = LARANJA , cor_fundo_nome = CINZA_8;
 
         desenRetang( 1 , 1 , jogo.tela.cols , jogo.tela.lins , PRETO );
 
         printFonte( nome , fonte , (PONTO){ x_fim_nome , jogo.tela.lins / 2 + 1 } , esp , cor_nome , PRETO );
 
-        for( int x = - tam ; x <= x_fim_msg ; x += inc ){
-                printFonte( msg , fonte , (PONTO){ x , jogo.tela.lins / 2 - altu } , esp , cor , PRETO );
+        if( !jogo.flag_modo_infinito ){
+                for( int x = - tam ; x <= x_fim_msg ; x += inc ){
+                        printFonte( msg , fonte , (PONTO){ x , jogo.tela.lins / 2 - altu } , esp , cor , PRETO );
 
-                pausaMS( delay );
+                        pausaMS( delay );
 
-                printFonte( msg , fonte , (PONTO){ x , jogo.tela.lins / 2 - altu } , esp , PRETO , PRETO );
+                        printFonte( msg , fonte , (PONTO){ x , jogo.tela.lins / 2 - altu } , esp , PRETO , PRETO );
 
-                if( !( x % 5 ) ) cor++;
+                        if( !( x % 5 ) ) cor++;
+                }
+
+                printFonte( msg , fonte , (PONTO){ x_fim_msg , jogo.tela.lins / 2 - altu } , esp , COR_APRESENTAR_LEVEL , PRETO );
         }
 
-        printFonte( msg , fonte , (PONTO){ x_fim_msg , jogo.tela.lins / 2 - altu } , esp , COR_APRESENTAR_LEVEL , PRETO );
         if( jogo.snake.level == 13 ) desenRetang_R( (RETANG){ (PONTO){ x_fim_nome - 1 , jogo.tela.lins / 2 + 1 - 1 } , tam_nome + 2 , fonte.altu + 2 } , ' '  , VERDE , VERDE );
-        if( jogo.snake.level == 14 ) desenRetang_R( (RETANG){ (PONTO){ x_fim_nome - 1 , jogo.tela.lins / 2 + 1 - 1 } , tam_nome + 2 , fonte.altu + 2 } , ' '  , CINZA , CINZA );
+        if( jogo.snake.level == 14 ) desenRetang_R( (RETANG){ (PONTO){ x_fim_nome - 1 , jogo.tela.lins / 2 + 1 - 1 } , tam_nome + 2 , fonte.altu + 2 } , ' '  , CINZA_8 , CINZA_8 );
 
-        printFonte( nome , fonte , (PONTO){ x_fim_nome , jogo.tela.lins / 2 + 1 } , esp , cor_nome , PRETO );
+        printFonte( nome , fonte , (PONTO){ x_fim_nome , jogo.tela.lins / 2 + 1 } , esp , cor_nome , cor_fundo_nome );
+
         pausaS( DELAY_FIM_LEVEL );
 
 }
