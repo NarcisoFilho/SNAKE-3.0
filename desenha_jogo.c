@@ -343,7 +343,7 @@ void desenhaDEBUGGER( JOGO* jogo ){
  *
  */
 void colorirSnake( JOGO* jogo , COR cor ){
-        for( int bloco = jogo->snake.tam - 2 ; bloco >= 0 ; bloco-- )
+        for( int bloco = 0 ; bloco < jogo->snake.tam - 1 ; bloco++ )
                 desenRetang( jogo->snake.pos[ bloco ].x , jogo->snake.pos[ bloco ].y , 2 , 1 , jogo->snake.cor );
 }
 //#####################################################

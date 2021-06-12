@@ -144,5 +144,6 @@
         #include "status_jogo.h"
         #include "desenha_menu.h"
         #include "Narconio/menuPadrao.h"
+        #include "som_jogo.h"
 
 #endif // __DEFINICOES_JOGO_H_

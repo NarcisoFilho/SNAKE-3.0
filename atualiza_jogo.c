@@ -445,7 +445,7 @@ void coletarDinheiro( JOGO* jogo ){
 
                                 jogo->snake.pontos += pontos_ganhos;
 
-                                jogo->snake.tam += INCREMENTO_TAM_ALIMENTO + nmrRand( 0 , 2 );
+                                jogo->snake.tam += INCREMENTO_TAM_ALIMENTO;
 
                                 flag_brilho_coleta = TEMPO_BRILHO_COLETA;
 
@@ -453,21 +453,16 @@ void coletarDinheiro( JOGO* jogo ){
                         }
         }
 
-        if( flag_brilho_coleta > 1 )
+        if( flag_brilho_coleta >= 1 )
                 if( jogo->flag_level_desenho_volatil ){
-                        jogo->snake.cor = jogo->snake.cor == COR_SNAKE_PADRAO ? BRANCO_BRILHANTE : COR_SNAKE_PADRAO;
+                        if( flag_brilho_coleta > 1 )
+                                jogo->snake.cor = jogo->snake.cor == COR_SNAKE_PADRAO ? BRANCO_BRILHANTE : COR_SNAKE_PADRAO;
+                        else
+                                jogo->snake.cor = COR_SNAKE_PADRAO;
+
                         colorirSnake( jogo , jogo->snake.cor );
                         flag_brilho_coleta--;
                 }
-
-        if( flag_brilho_coleta == 1 )
-                if( jogo->flag_level_desenho_volatil ){
-                        jogo->snake.cor = COR_SNAKE_PADRAO;
-                        colorirSnake( jogo , jogo->snake.cor );
-                        flag_brilho_coleta--;
-                }
-
-
 }
 //#####################################################
 

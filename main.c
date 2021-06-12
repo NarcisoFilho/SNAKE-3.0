@@ -27,7 +27,7 @@ int main(){
         inicializarJanela();            // Ativa modo janela ANSI, se necessário
         configurarPreJogo( &jogo );     // Configuração de definições do jogo e carregamento de recusrsos
 
-        // Nova Partida
+        // MAIN MENU
         do{
                 if( jogo.menu.item_alterado ) desenhar_menu( &jogo.menu );
                 atualizar_menu( &jogo.menu );
@@ -57,6 +57,7 @@ void campanha( JOGO* jogo ){
         inicializarPrePartida( jogo );    // Reinicializa os dados do jogo para NOVA PARTIDA
         jogo->flag_modo_infinito = false;
 
+        iniciar_sistema_som_menu();
 
         do{
                 inicializarNovoLevel( jogo );    // Reinicializa os dados do jogo para NOVO LEVEL

@@ -1,7 +1,6 @@
 
 #include "menuPadrao.h"
 
-
 /** \brief Atualiza a seleção pelo teclado ou mouse
  *
  * \param int* : Endereço da variável inteira correspondente à seleção
