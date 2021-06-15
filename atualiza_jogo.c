@@ -14,13 +14,16 @@ void atualizaJogo( JOGO* jogo ){
         atualizarFlagsRedesenho( jogo );
 
         // SNAKE
-        atualizaSentidoSnake( &jogo->snake );
+        atualizaSentidoSnake( jogo );
         if( jogo->flag_level_desenho_volatil ){
                 atualizaPosSnake( &jogo->snake );
                 verificaPosSnake_limites( jogo );
                 verificaPosSnake_obstaculos( jogo );
                 verificaPosSnake_autoColisao( jogo );
         }
+
+        // SOM
+        atualizarSom( jogo );
 
         // ALIMENTO
         geraAlimento( jogo );
@@ -209,38 +212,46 @@ void verificaPosSnake_autoColisao( JOGO* jogo ){
 
 /** \brief Atualiza o sentido da  snake
  *
- * \param SNAKE*
+ * \param JOGO*
  * \return void
  *
  */
-void atualizaSentidoSnake( SNAKE* snake ){
+void atualizaSentidoSnake( JOGO* jogo ){
+        SNAKE* snake = &jogo->snake;
 
         if( checaTecla_Pressionada( VK_UP ) )
                 if( snake->pos[ 1 ].y != snake->pos[ 0 ].y - 1  )
-                        if( snake->sentido != BAIXO ){
-                                        snake->sentido = CIMA;
-                                        return;
-                        }
+                        if( snake->sentido != CIMA )
+                                if( snake->sentido != BAIXO ){
+                                                snake->sentido = CIMA;
+                                                sincronizarSomJogo( jogo , "jm" );
+                                                return;
+                                }
 
         if( checaTecla_Pressionada( VK_DOWN ) )
                 if( snake->pos[ 1 ].y != snake->pos[ 0 ].y + 1  )
-                        if( snake->sentido != CIMA ){
-                                        snake->sentido = BAIXO;
-                                        return;
-                        }
+                        if( snake->sentido != BAIXO )
+                                if( snake->sentido != CIMA ){
+                                                snake->sentido = BAIXO;
+                                                sincronizarSomJogo( jogo , "jm" );
+                                                return;
+                                }
 
         if( checaTecla_Pressionada( VK_LEFT ) )
                 if( snake->pos[ 1 ].x != snake->pos[ 0 ].x - 2  )
-                        if( snake->sentido != DIREITA ){
-                                        snake->sentido = ESQUERDA;
-                                        return;
-                        }
+                        if( snake->sentido != ESQUERDA )
+                                if( snake->sentido != DIREITA ){
+                                                snake->sentido = ESQUERDA;
+                                                sincronizarSomJogo( jogo , "jm" );                                                return;
+                                }
         if( checaTecla_Pressionada( VK_RIGHT ) )
                 if( snake->pos[ 1 ].x != snake->pos[ 0 ].x + 2  )
-                        if( snake->sentido != ESQUERDA ){
-                                        snake->sentido = DIREITA;
-                                        return;
-                        }}
+                        if( snake->sentido != DIREITA )
+                                if( snake->sentido != ESQUERDA ){
+                                                snake->sentido = DIREITA;
+                                                sincronizarSomJogo( jogo , "jm" );
+                                                return;
+                                }}
 //#####################################################
 
 
@@ -391,7 +402,12 @@ void coletarAlimento( JOGO* jogo ){
                                 jogo->snake.pontos += QTD_PONTOS_ALIMENTOS_FACIL * _DIFICULDADE;
                                 jogo->snake.tam += INCREMENTO_TAM_ALIMENTO;
 
+                                for( int i = INCREMENTO_TAM_ALIMENTO ; i ; i-- )
+                                        jogo->snake.pos[ jogo->snake.tam - i ] = jogo->snake.pos[ jogo->snake.tam - ( i + 1 ) ];
+
                                 jogo->flag_level_desenho_esporadico = true;
+
+                                musica_coleta_alimento();
                                 return;
                         }
 }
@@ -447,9 +463,14 @@ void coletarDinheiro( JOGO* jogo ){
 
                                 jogo->snake.tam += INCREMENTO_TAM_ALIMENTO;
 
+                                for( int i = INCREMENTO_TAM_ALIMENTO ; i ; i-- )
+                                        jogo->snake.pos[ jogo->snake.tam - i ] = jogo->snake.pos[ jogo->snake.tam - ( i + 1 ) ];
+
                                 flag_brilho_coleta = TEMPO_BRILHO_COLETA;
 
                                 jogo->flag_level_desenho_esporadico = true;
+
+                                musica_coleta_dinheiro();
                         }
         }
 
@@ -492,6 +513,7 @@ void atualizaPortal( JOGO* jogo ){
 
                                 int tam = jogo->snake.tam;
 
+                                musica_portal();
                                 do{
                                         _ftime( &tempo );
                                         atualizarFlagsRedesenho( jogo );
@@ -574,6 +596,19 @@ void salvaHighScoresArquivo( JOGO* jogo ){
                 for( int j = 0 ; j < 5 ; j++ )
                         fwrite( &jogo->highscores[ i ][ j ] , sizeof( HIGHSCORES ) , 1 , arq );
         fclose( arq );
+}
+//#####################################################
+
+
+
+/** \brief Atualiza o som
+ *
+ * \param JOGO*
+ * \return void
+ *
+ */
+void atualizarSom( JOGO* jogo ){
+        sincronizarSomJogo( jogo , "jn" );
 }
 //#####################################################
 

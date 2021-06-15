@@ -29,6 +29,8 @@ void configurarPreJogo( JOGO* jogo ){
         configurarMenu( jogo );         // Configura o menu
 
         carregarHighscores( jogo );     // Carrega os highscores, de cada modo de jogo, do arquivo highscores.bin
+
+        configurarSom( jogo );     // Configura o sistema de áudio
 }
 //#####################################################
 
@@ -249,6 +251,25 @@ void carregarHighscores( JOGO* jogo ){
                 for( int j = 0 ; j < 5 ; j++ )
                         fread( &jogo->highscores[ i ][ j ] , sizeof( HIGHSCORES ) , 1 , arq );
         fclose( arq );
+}
+//#####################################################
+
+
+
+/** \brief Configura o sistema de áudio
+ *
+ * \param JOGO*
+ * \return void
+ *
+ */
+void configurarSom( JOGO* jogo ){
+        FILE* arq = fopen( "Som/MODO_SOM_ATUAL.txt" , "w" );
+        if( arq == NULL ) ErroFatal( FALHA_AUTORIZACAO_ABERTURA_ARQ );
+
+        jogo->modo_som.arq_modo = arq;
+        jogo->modo_som.ativado = true;
+        sincronizarSomJogo( jogo , "mf");
+        iniciar_sistema_som_jogo();
 }
 //#####################################################
 

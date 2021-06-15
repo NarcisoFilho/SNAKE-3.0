@@ -14,6 +14,8 @@
         void configurarJogabilidade( JOGO* jogo );
         void configurarMenu( JOGO* jogo );
         void carregarHighscores( JOGO* );
+        void configurarSom( JOGO* jogo );
+
         PONTO ObterResolucaoMonitor( void );
 
         void ativarModoDeTeste( JOGO* jogo );

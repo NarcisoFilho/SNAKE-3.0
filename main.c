@@ -10,8 +10,7 @@ void highScores( JOGO* );
 void sair( JOGO* );
 void exibirHighScores( JOGO* , int );
 
-
-/** \brief Função principal do jogo
+/** \brief Função Master do jogo
  *
  * \param void
  * \return void
@@ -26,11 +25,20 @@ int main(){
         // Inicialização
         inicializarJanela();            // Ativa modo janela ANSI, se necessário
         configurarPreJogo( &jogo );     // Configuração de definições do jogo e carregamento de recusrsos
+        printf("\n\n\t");
+
+        system( "Logo\\Abertura_Logo_ASCII.exe" );
 
         // MAIN MENU
         do{
                 if( jogo.menu.item_alterado ) desenhar_menu( &jogo.menu );
                 atualizar_menu( &jogo.menu );
+
+                if( jogo.menu.selec ==  4 ) sincronizarSomJogo( &jogo , "mb" );
+                else{
+                        if( jogo.menu.selec == 0 ) sincronizarSomJogo( &jogo , "mj" );
+                        else sincronizarSomJogo( &jogo , "mf" );
+                }
 
                 if( checaTecla_Pressionada( VK_RETURN ) ){
                         funcs[ jogo.menu.selec ]( &jogo );
@@ -41,6 +49,7 @@ int main(){
         }while( !jogo.menu.sair_loop );
 
         finalizarJanela();
+        encerrar_sistema_som_jogo();
         return 0;
 }
 //#####################################################
@@ -57,9 +66,9 @@ void campanha( JOGO* jogo ){
         inicializarPrePartida( jogo );    // Reinicializa os dados do jogo para NOVA PARTIDA
         jogo->flag_modo_infinito = false;
 
-        iniciar_sistema_som_menu();
-
         do{
+                sincronizarSomJogo( jogo , "d" );
+                musica_novo_level();
                 inicializarNovoLevel( jogo );    // Reinicializa os dados do jogo para NOVO LEVEL
                 desenNovoLevel( *jogo );
                 do{
@@ -69,6 +78,8 @@ void campanha( JOGO* jogo ){
 
                 if( !_FIM_DE_JOGO ) jogo->snake.level++;    // Incrementar level
         }while( !_FIM_DE_JOGO  );
+
+        sincronizarSomJogo( jogo ,"d" );
 
         desenFimJogo( *jogo );          // Desenha frase de fim de jogo
 
@@ -101,6 +112,9 @@ void modoSobrevivencia( JOGO* jogo ){
                 if( checaTecla_Pressionada( VK_ESCAPE ) ) flag_voltar = true;
                 if( checaTecla_Pressionada( VK_DOWN )  &&  level < QTD_LEVELs + 1) level++;
                 if( checaTecla_Pressionada( VK_UP )  &&  level > 1 ) level--;
+
+                if( level == QTD_LEVELs ) sincronizarSomJogo( jogo , "eb");
+                else sincronizarSomJogo( jogo , "ef");
 
                 for( int i = 1 ; i <= QTD_LEVELs ; i++ )
                         print_PRO( nomes_levels( i ) , (PONTO){ ( jogo->tela.cols - strlen( nomes_levels( i ) ) ) / 2 , 2 + jogo->res.fonte_big.altu + jogo->res.fonte_small.altu + 2 * i } , PADRAO , i != level ? BRANCO : AMARELO , COR_FUNDO_AREA_EXTERNA );
@@ -176,6 +190,7 @@ void dificuldade( JOGO* jogo ){
         desenRetang( 0 , 0 , jogo->tela.cols , jogo->tela.lins , COR_FUNDO_AREA_EXTERNA );
         printFonte( tit , fonte , (PONTO){ centro_tela.x - tam_tit / 2 , y_tit } , esp , VERDE_MUSGO , COR_FUNDO_AREA_EXTERNA );
 
+        sincronizarSomJogo( jogo , "hf" );
         do{
                 if( checaTecla_Pressionada( VK_RIGHT ) ){
                         desenRetang( centro_tela.x - tam_difs[ dif_atual - 1 ] / 2 , centro_tela.y , tam_difs[ dif_atual - 1 ] , fonte.altu , COR_FUNDO_AREA_EXTERNA );
@@ -233,6 +248,7 @@ void dificuldade( JOGO* jogo ){
                                 cor_setas = CINZA_5;
                                 cor_voltar = 172;
                                 flag_voltar_liberado = true;
+                                sincronizarSomJogo( jogo , "hb" );
                         }
                 }else{
                         if( checaTecla_Pressionada( VK_RETURN )
@@ -244,6 +260,7 @@ void dificuldade( JOGO* jogo ){
                                 flag_voltar_liberado = false;
                                 cor_setas = VERDE_AZULADO_ESCURO;
                                 cor_voltar = CINZA_5;
+                                sincronizarSomJogo( jogo , "hf" );
                            }
                 }
 
@@ -286,6 +303,9 @@ void highScores( JOGO* jogo ){
                 if( sel == - 1 ) sel = 2;
                 if( sel == 3 ) sel = 0;
 
+                if( sel == 2 ) sincronizarSomJogo( jogo , "hb" );
+                else sincronizarSomJogo( jogo , "hf" );
+
                 if( checaTecla_Pressionada( VK_RETURN ) ){
                         int level = 1;
                         FLAG flag_voltar = false;
@@ -303,6 +323,9 @@ void highScores( JOGO* jogo ){
                                                 if( checaTecla_Pressionada( VK_DOWN )  &&  level< QTD_LEVELs + 1 ) level++;
                                                 if( checaTecla_Pressionada( VK_UP )  &&  level > 1 ) level--;
 
+                                                if( level == QTD_LEVELs ) sincronizarSomJogo( jogo , "eb");
+                                                else sincronizarSomJogo( jogo , "ef");
+
                                                 for( int i = 1 ; i <= QTD_LEVELs ; i++ ){
                                                         cursorXY( ( jogo->tela.cols - strlen( nomes_levels( i ) ) ) / 2 , 2 + jogo->res.fonte_big.altu + jogo->res.fonte_small.altu + 2 * i );
                                                         defCorTxt_PRO( i != level ? BRANCO : AMARELO , cor_fundo , PADRAO );
@@ -311,7 +334,7 @@ void highScores( JOGO* jogo ){
 
                                                 print_PRO( "VOLTAR AO MAIN MENU" , (PONTO){ ( jogo->tela.cols - strlen( "VOLTAR AO MAIN MENU" ) ) / 2 , 2 + jogo->res.fonte_big.altu + jogo->res.fonte_small.altu + 2 * 15 } , PADRAO , 15 != level ? BRANCO : AMARELO , COR_FUNDO_AREA_EXTERNA );
 
-                                                pausaMS( MENU_DELAY );
+                                                pausaMS( MENU_DELAY / 3 );
                                         }while( !checaTecla_Pressionada( VK_RETURN )  &&  !flag_voltar );
                                 }
                                 if( level == 15 )
@@ -321,7 +344,8 @@ void highScores( JOGO* jogo ){
                                         colorirTela( jogo , cor_fundo );
                                         exibirHighScores( jogo , level );
                                         pausaMS( 100 );
-                                        while( !( checaTecla_Pressionada( VK_RETURN )  ||  checaTecla_Pressionada( VK_SPACE )  ||  checaTecla_Pressionada( VK_ESCAPE ) ) );
+                                        while( !( checaTecla_Pressionada( VK_RETURN )  ||  checaTecla_Pressionada( VK_SPACE )  ||  checaTecla_Pressionada( VK_ESCAPE ) ) )
+                                                sincronizarSomJogo( jogo , "p" );
                                 }
                                 colorirTela( jogo , cor_fundo );
                         }else
@@ -329,9 +353,10 @@ void highScores( JOGO* jogo ){
                 }
 
                 if( checaTecla_Pressionada( VK_ESCAPE ) )
-                                flag_sair = true;
+                        flag_sair = true;
 
-                pausaMS( 2 * MENU_DELAY / 3 );
+                pausaMS( MENU_DELAY / 3 );
+                sincronizarSomJogo( jogo , "h" );
         }while( !flag_sair );
 }
 //#####################################################
@@ -380,5 +405,6 @@ void exibirHighScores( JOGO* jogo , int sel ){
         }
 }
 //#####################################################
+
 
 

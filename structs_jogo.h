@@ -66,6 +66,12 @@
         }HIGHSCORES; /* Registro das pontuações mais altas carregadas de arquivo .bin */
 
         typedef struct{
+                FILE* arq_modo;         // Registro em disco do modo de áudio atual. Atualizado pelo jogo e lido pelo sistema de áudio
+                char modo_atual[ 3 ];
+                BOOL ativado;
+        }MODO_SOM;
+
+        typedef struct{
                 // Tela
                 TELA tela;                      // Tela do jogo
                 RETANG area_do_jogo;        // A área do jogo onde a snake pode se movimentar
@@ -84,6 +90,8 @@
                 // Rescursos
                 RES res;        // Recursos do jogo
                 LEVEL level[ QTD_LEVELs + 1 ];  // Os leveis do jogo
+
+                MODO_SOM modo_som;      // Administra o modo de som
 
                 HIGHSCORES highscores[ QTD_LEVELs + 1 ][ QTD_HIGHSCORES ];     // Carrega os highscores, de cada modo de jogo, do arquivo highscores.bin
                 // highscores[ 0 ] para modo campanha e highcores[ level ] para cada level no modo sobrevivência

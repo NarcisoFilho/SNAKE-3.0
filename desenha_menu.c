@@ -30,6 +30,8 @@ void desenFimJogo( JOGO jogo ){
                 cor_texto_final = BRANCO_BRILHANTE;
                 cor_fundo_texto = MAROON;
                 cor_fundo_moldura = VERMELHO;
+
+                musica_game_over();
         }
 
         // Limpa a tela

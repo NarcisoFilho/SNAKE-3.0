@@ -11,7 +11,7 @@
 
         // Snake
         void atualizaPosSnake( SNAKE* );
-        void atualizaSentidoSnake( SNAKE* );
+        void atualizaSentidoSnake( JOGO* );
         void verificaPosSnake_limites( JOGO* );
         void verificaPosSnake_obstaculos( JOGO* );
         void verificaPosSnake_autoColisao( JOGO* );
@@ -28,10 +28,14 @@
         // Pause
         void atualizaPause( JOGO* );
 
+        // Som
+        void atualizarSom( JOGO* );
+
         // Extras
         void verificarFecharJogoTeclado( void );
-        void salvaPontuac( JOGO* jogo );
-        void salvaHighScoresArquivo( JOGO* jogo );
-        char* coletarNomeJogador( JOGO* jogo );
+        void salvaPontuac( JOGO* );
+        void salvaHighScoresArquivo( JOGO* );
+        char* coletarNomeJogador( JOGO* );
+
 
 #endif // __ATUALIZA_JOGO_H_
