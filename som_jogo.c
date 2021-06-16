@@ -1,44 +1,6 @@
 
 #include "definicoes_jogo.h"
 
-/** \brief Emite beep das setas
- *
- * \param void
- * \return void
- *
- */
-void som_seta_menu( void ){
-        system( "START /REALTIME /MIN Som/Beep_Seta.exe");
-}
-//#####################################################
-
-
-
-/** \brief Emite beep da tecla enter
- *
- * \param void
- * \return void
- *
- */
-void som_enter_menu( void ){
-        system( "START /REALTIME /MIN Som/Beep_Enter.exe");
-}
-//#####################################################
-
-
-
-/** \brief Emite beep da tecla esc
- *
- * \param void
- * \return void
- *
- */
-void som_esc_menu( void ){
-        system( "START /REALTIME /MIN Som/Beep_Esc.exe");
-}
-//#####################################################
-
-
 
 /** \brief Reproduzir música de novo level
  *
@@ -79,25 +41,26 @@ void musica_game_over( void ){
 
 
 
-/** \brief Reproduzir música de coleta de alimento
+/** \brief Reproduzir música de adios
  * \param void
  * \return void
  *
  */
-void musica_coleta_alimento( void ){
-        system( "START /REALTIME /MIN Som/som_coleta_simples.exe");
+void musica_adios( void ){
+        system( "START /REALTIME /MIN Som/som_encerramento.exe");
 }
 //#####################################################
 
 
 
-/** \brief Reproduzir música de coleta de dinheiro
+/** \brief Reproduzir música de vitória
+ *      Reproduz versão da música de vitória do Ayrton Sena
  * \param void
  * \return void
  *
  */
-void musica_coleta_dinheiro( void ){
-        system( "START /REALTIME /MIN Som/som_coleta_dinheiro.exe");
+void musica_vitoria( void ){
+        system( "START /REALTIME /MIN Som/musica_ayrton_sena.exe");
 }
 //#####################################################
 

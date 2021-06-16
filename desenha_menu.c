@@ -24,6 +24,7 @@ void desenFimJogo( JOGO jogo ){
                 cor_fundo_texto = VERDE_ESCURO;
                 cor_fundo_moldura = VERDE_MUSGO;
 
+                musica_vitoria();
         }else{  /* Caso tenha morrido */
                 strcpy( msg_1 , "GAME  OVER" );
                 cor_texto_inicial = VERMELHO;
@@ -144,7 +145,7 @@ void desenNovoLevel( JOGO jogo ){
                         if( !( x % 5 ) ) cor++;
                 }
 
-                printFonte( msg , fonte , (PONTO){ x_fim_msg , jogo.tela.lins / 2 - altu } , esp , COR_APRESENTAR_LEVEL , PRETO );
+                printFonte( msg , fonte , (PONTO){ x_fim_msg , jogo.tela.lins / 2 - altu } , esp , cor_nome , PRETO );
         }
 
         if( jogo.snake.level == 13 ) desenRetang_R( (RETANG){ (PONTO){ x_fim_nome - 1 , jogo.tela.lins / 2 + 1 - 1 } , tam_nome + 2 , fonte.altu + 2 } , ' '  , VERDE , VERDE );

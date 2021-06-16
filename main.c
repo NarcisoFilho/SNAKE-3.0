@@ -8,6 +8,7 @@ void modoSobrevivencia( JOGO* );
 void dificuldade( JOGO* );
 void highScores( JOGO* );
 void sair( JOGO* );
+void adios( TELA tela );
 void exibirHighScores( JOGO* , int );
 
 /** \brief Função Master do jogo
@@ -49,6 +50,7 @@ int main(){
         }while( !jogo.menu.sair_loop );
 
         finalizarJanela();
+        adios( jogo.tela );
         encerrar_sistema_som_jogo();
         return 0;
 }
@@ -332,9 +334,9 @@ void highScores( JOGO* jogo ){
                                                         printf( "%s :\t%s > %d" , nomes_levels( i ) , jogo->highscores[ i ][ 0 ].nome_jogador , jogo->highscores[ i ][ 0 ].pontos );
                                                 }
 
-                                                print_PRO( "VOLTAR AO MAIN MENU" , (PONTO){ ( jogo->tela.cols - strlen( "VOLTAR AO MAIN MENU" ) ) / 2 , 2 + jogo->res.fonte_big.altu + jogo->res.fonte_small.altu + 2 * 15 } , PADRAO , 15 != level ? BRANCO : AMARELO , COR_FUNDO_AREA_EXTERNA );
+                                                print_PRO( "VOLTAR" , (PONTO){ ( jogo->tela.cols - strlen( "VOLTAR" ) ) / 2 , 2 + jogo->res.fonte_big.altu + jogo->res.fonte_small.altu + 2 * 15 } , PADRAO , 15 != level ? BRANCO : AMARELO , COR_FUNDO_AREA_EXTERNA );
 
-                                                pausaMS( MENU_DELAY / 3 );
+                                                pausaMS( 2 * MENU_DELAY );
                                         }while( !checaTecla_Pressionada( VK_RETURN )  &&  !flag_voltar );
                                 }
                                 if( level == 15 )
@@ -355,7 +357,7 @@ void highScores( JOGO* jogo ){
                 if( checaTecla_Pressionada( VK_ESCAPE ) )
                         flag_sair = true;
 
-                pausaMS( MENU_DELAY / 3 );
+                pausaMS( MENU_DELAY / 4 );
                 sincronizarSomJogo( jogo , "h" );
         }while( !flag_sair );
 }
@@ -371,6 +373,24 @@ void highScores( JOGO* jogo ){
  */
 void sair( JOGO* jogo ){
         jogo->menu.sair_loop = true;
+}
+//#####################################################
+
+
+
+/** \brief Exibe mensagem agradecendoao jogador
+ *
+ * \param TELA*
+ * \return void
+ *
+ */
+void adios( TELA tela ){
+        char msg[] = "Obrigado por jogar!";
+
+        musica_adios();
+        LMPTELA;
+        printSubliColorXY( msg , ( tela.cols - strlen( msg ) ) / 2 , tela.lins / 2 , VERDE_BRILHANTE );
+        pausaS( 3 );
 }
 //#####################################################
 

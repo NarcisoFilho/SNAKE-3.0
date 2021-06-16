@@ -64,12 +64,6 @@ int main(){
 
                         // SOM NO JOGO
                         case 'j':
-                                if( modo[ 1 ] == 'm' ){
-                                                Beep( C5 , 10 * t );
-                                                fseek( arq , 1 , SEEK_SET );
-                                                fputc( 'n' , arq );
-                                        }
-
                                 if( modo[ 1 ] == 'a' ){
                                                 Beep( C6 , 20 * t );
                                                 fseek( arq , 1 , SEEK_SET );
@@ -94,6 +88,28 @@ int main(){
                                 ||  checaTecla( VK_SPACE ) ){
                                         if( modo[ 1 ] == 'f' )
                                                 BEEP_ENTER;
+                                }
+
+                                break;
+
+                        // SOM NA DIGITAÇÃO
+                        case 't':
+                                if( checaTecla( VK_RETURN ) ){
+                                        Beep( F5 , t * 20 );
+                                        Beep( A5 , t * 20 );
+                                }
+
+                                if( modo[ 1 ] == 'e' ){
+                                        Beep( 1500 , 10 );
+                                        fseek( arq , 1 , SEEK_SET );
+                                        fputc( 'n' , arq );
+                                }
+
+                                if( modo[ 1 ] == 'l' ){
+                                        Beep( 2500 , 5 );
+                                        Beep( 3000 , 5 );
+                                        fseek( arq , 1 , SEEK_SET );
+                                        fputc( 'n' , arq );
                                 }
 
                                 break;

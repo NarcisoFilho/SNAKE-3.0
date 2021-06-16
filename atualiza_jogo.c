@@ -223,34 +223,31 @@ void atualizaSentidoSnake( JOGO* jogo ){
                 if( snake->pos[ 1 ].y != snake->pos[ 0 ].y - 1  )
                         if( snake->sentido != CIMA )
                                 if( snake->sentido != BAIXO ){
-                                                snake->sentido = CIMA;
-                                                sincronizarSomJogo( jogo , "jm" );
-                                                return;
+                                        snake->sentido = CIMA;
+                                        return;
                                 }
 
         if( checaTecla_Pressionada( VK_DOWN ) )
                 if( snake->pos[ 1 ].y != snake->pos[ 0 ].y + 1  )
                         if( snake->sentido != BAIXO )
                                 if( snake->sentido != CIMA ){
-                                                snake->sentido = BAIXO;
-                                                sincronizarSomJogo( jogo , "jm" );
-                                                return;
+                                        snake->sentido = BAIXO;
+                                        return;
                                 }
 
         if( checaTecla_Pressionada( VK_LEFT ) )
                 if( snake->pos[ 1 ].x != snake->pos[ 0 ].x - 2  )
                         if( snake->sentido != ESQUERDA )
                                 if( snake->sentido != DIREITA ){
-                                                snake->sentido = ESQUERDA;
-                                                sincronizarSomJogo( jogo , "jm" );                                                return;
+                                        snake->sentido = ESQUERDA;
+                                        return;
                                 }
         if( checaTecla_Pressionada( VK_RIGHT ) )
                 if( snake->pos[ 1 ].x != snake->pos[ 0 ].x + 2  )
                         if( snake->sentido != DIREITA )
                                 if( snake->sentido != ESQUERDA ){
-                                                snake->sentido = DIREITA;
-                                                sincronizarSomJogo( jogo , "jm" );
-                                                return;
+                                        snake->sentido = DIREITA;
+                                        return;
                                 }}
 //#####################################################
 
@@ -407,7 +404,7 @@ void coletarAlimento( JOGO* jogo ){
 
                                 jogo->flag_level_desenho_esporadico = true;
 
-                                musica_coleta_alimento();
+                                sincronizarSomJogo( jogo , "ja" );
                                 return;
                         }
 }
@@ -470,7 +467,7 @@ void coletarDinheiro( JOGO* jogo ){
 
                                 jogo->flag_level_desenho_esporadico = true;
 
-                                musica_coleta_dinheiro();
+                                sincronizarSomJogo( jogo , "jd" );
                         }
         }
 
@@ -608,7 +605,14 @@ void salvaHighScoresArquivo( JOGO* jogo ){
  *
  */
 void atualizarSom( JOGO* jogo ){
-        sincronizarSomJogo( jogo , "jn" );
+        char ch;
+        FILE* arq = jogo->modo_som.arq_modo;
+        rewind( arq );
+        ch = fgetc( arq );
+        ch = fgetc( arq );
+
+        if( ch != 'a'  &&  ch != 'd'  &&  ch != 'm' )
+                sincronizarSomJogo( jogo , "jn" );
 }
 //#####################################################
 
@@ -644,7 +648,9 @@ char* coletarNomeJogador( JOGO* jogo ){
         #include <conio.h>
         char ch;
         while( kbhit() ) ch = getch();
+
         do{
+                sincronizarSomJogo( jogo , "tn" );
                 if( !checaTecla_Pressionada( VK_RETURN ) ){
                         ch = getch();
                         if( ch != '\n'  &&  ch != '\r' ){
@@ -660,12 +666,15 @@ char* coletarNomeJogador( JOGO* jogo ){
                                         COR_FUNDO_AREA_EXTERNA
                                 );
 
-                                if( ch == '\b' )
+                                if( ch == '\b' ){
                                         nome[ strlen( nome ) - 1 ] = '\0';
+                                        sincronizarSomJogo( jogo , "te" );
+                                }
                                 else
                                         if( strlen( nome ) < TAM_MAX_NOME ){
                                                 nome[ strlen( nome ) + 1 ] = '\0';
                                                 nome[ strlen( nome ) ] = ch;
+                                                sincronizarSomJogo( jogo , "tl" );
                                         }
 
                                 if( strlen( nome ) ){

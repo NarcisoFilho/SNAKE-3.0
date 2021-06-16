@@ -263,7 +263,7 @@ void carregarHighscores( JOGO* jogo ){
  *
  */
 void configurarSom( JOGO* jogo ){
-        FILE* arq = fopen( "Som/MODO_SOM_ATUAL.txt" , "w" );
+        FILE* arq = fopen( "Som/MODO_SOM_ATUAL.txt" , "w+" );
         if( arq == NULL ) ErroFatal( FALHA_AUTORIZACAO_ABERTURA_ARQ );
 
         jogo->modo_som.arq_modo = arq;
